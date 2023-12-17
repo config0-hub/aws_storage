@@ -120,10 +120,10 @@ def run(stackargs):
                              types="bool")
 
     # add execgroup
-    stack.add_execgroup("config0-hub:::aws_storage::rds", "tf_execgroup")
+    stack.add_execgroup("config0-publish:::aws_storage::rds", "tf_execgroup")
 
     # add substack
-    stack.add_substack('config0-hub:::tf_executor')
+    stack.add_substack('config0-publish:::tf_executor')
 
     # initialize
     stack.init_variables()

@@ -4,7 +4,7 @@
 
 **Infrastructure**
 
-  - expects an existing VPC/security groups created by Config0 (e.g. config0-hub:::aws_vpc_simple)
+  - expects an existing VPC/security groups created by Config0 (e.g. config0-publish:::aws_vpc_simple)
 
 **Required**
 
@@ -43,7 +43,7 @@
 ```
 infrastructure:
    rds:
-       stack_name: config0-hub:::aws_rds
+       stack_name: config0-publish:::aws_rds
        arguments:
           rds_name: rds-dev-mysql
           vpc_name: eval-config0-vpc
@@ -106,7 +106,7 @@ selectors:
        resource_type: subnet
 infrastructure:
    rds:
-       stack_name: config0-hub:::aws_rds
+       stack_name: config0-publish:::aws_rds
        arguments:
           vpc_name: selector:::vpc_info::name
           sg_id: selector:::sg_info::sg_id

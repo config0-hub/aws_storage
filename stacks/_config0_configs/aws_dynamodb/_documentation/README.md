@@ -28,7 +28,7 @@ labels:
      purpose: test
 infrastructure:
    dynamodb:
-       stack_name: config0-hub:::aws_dynamodb
+       stack_name: config0-publish:::aws_dynamodb
        arguments:
           dynamodb_name: example-dynamodb-table
        labels:
