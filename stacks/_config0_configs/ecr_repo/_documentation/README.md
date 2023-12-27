@@ -21,7 +21,7 @@
 ```
 infrastructure:
    ecr_repo:
-       stack_name: config0-publish:::ecr_repo
+       stack_name: config0-hub:::ecr_repo
        arguments:
           name: flask_sample
        credentials:

@@ -25,7 +25,7 @@
 ```
 infrastructure:
    s3:
-       stack_name: config0-publish:::aws_s3_bucket
+       stack_name: config0-hub:::aws_s3_bucket
        arguments:
           bucket: test4532532
           acl: private

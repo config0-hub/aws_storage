@@ -21,7 +21,7 @@
 ```
 infrastructure:
    ssm:
-       stack_name: config0-publish:::aws_parameter_store
+       stack_name: config0-hub:::aws_parameter_store
        arguments:
           ssm_key: key123
           ssm_value: hello123
