@@ -26,11 +26,11 @@ def run(stackargs):
                              types="str")
 
     # Add execgroup
-    stack.add_execgroup("config0-hub:::aws_storage::dynamodb_item",
+    stack.add_execgroup("config0-publish:::aws_storage::dynamodb_item",
                         "tf_execgroup")
 
     # Add substack
-    stack.add_substack("config0-hub:::tf_executor")
+    stack.add_substack("config0-publish:::tf_executor")
 
     # Initialize Variables in stack
     stack.init_variables()

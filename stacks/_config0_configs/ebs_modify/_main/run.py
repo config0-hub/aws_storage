@@ -148,13 +148,13 @@ def run(stackargs):
                              types="str")
 
     # add execgroup
-    stack.add_execgroup("config0-hub:::aws_storage::attach_volume_to_ec2", 
+    stack.add_execgroup("config0-publish:::aws_storage::attach_volume_to_ec2", 
                         "tf_execgroup")
 
-    stack.add_execgroup("config0-hub:::aws_storage::config_vol")
+    stack.add_execgroup("config0-publish:::aws_storage::config_vol")
 
     # Add substack
-    stack.add_substack("config0-hub:::tf_executor")
+    stack.add_substack("config0-publish:::tf_executor")
 
     # Initialize Variables in stack
     stack.init_variables()

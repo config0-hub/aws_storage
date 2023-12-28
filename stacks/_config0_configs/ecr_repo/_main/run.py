@@ -19,7 +19,7 @@ def run(stackargs):
                              types="str")
 
     # Add shelloutconfig dependencies
-    stack.add_shelloutconfig('config0-hub:::aws_storage::ecr_repo',
+    stack.add_shelloutconfig('config0-publish:::aws_storage::ecr_repo',
                              "ecr_repo_script")
 
     # Initialize Variables in stack
