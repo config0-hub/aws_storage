@@ -13,7 +13,7 @@ def run(stackargs):
                              types="str")
 
     stack.parse.add_required(key="rds_name",
-                             tags="resource,runtime_settings,db,tfvar",
+                             tags="resource,tf_runtime,db,tfvar",
                              types="str")
 
     stack.parse.add_optional(key="db_name",
@@ -108,7 +108,7 @@ def run(stackargs):
 
     stack.parse.add_optional(key="aws_default_region",
                              default="eu-west-1",
-                             tags="tfvar,db,resource,runtime_settings",
+                             tags="tfvar,db,resource,tf_runtime",
                              types="str")
 
     stack.parse.add_optional(key="publish_creds",
