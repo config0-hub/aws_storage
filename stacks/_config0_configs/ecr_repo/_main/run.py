@@ -35,24 +35,30 @@ def run(stackargs):
         stack.ehandle.NeedRtInput(message= msg)
 
     # Check if ECR repo exists for docker images
-    docker_repo = stack.check_resource(name=name,
-                                       resource_type="ecr_repo",
-                                       provider="aws")
+    docker_repo = stack.check_resource(
+            name=name,
+            resource_type="ecr_repo",
+            provider="aws"
+    )
 
     if not docker_repo:
 
-        stack.env_vars = {"INSERT_IF_EXISTS": True,
-                          "AWS_DEFAULT_REGION" : stack.aws_default_region,
-                          "NAME" : stack.name,
-                          "METHOD" : "create"}
+        stack.env_vars = {
+                "INSERT_IF_EXISTS": True,
+                "AWS_DEFAULT_REGION" : stack.aws_default_region,
+                "NAME" : stack.name,
+                "METHOD" : "create"
+        }
 
-        inputargs = {"display": True,
-                     "human_description" : 'Creating AWS ecr_repo',
-                     "env_vars" : json.dumps(stack.env_vars),
-                     "automation_phase" : "infrastructure",
-                     "retries" : 2,
-                     "timeout" : 180,
-                     "wait_last_run" : 2}
+        inputargs = {
+                "display": True,
+                "human_description" : 'Creating AWS ecr_repo',
+                "env_vars" : json.dumps(stack.env_vars),
+                "automation_phase" : "infrastructure",
+                "retries" : 2,
+                "timeout" : 180,
+                "wait_last_run" : 2
+        }
 
         stack.ecr_repo_script.resource_exec(**inputargs)
 
