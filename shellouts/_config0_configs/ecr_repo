@@ -14,7 +14,10 @@ class Main(AwsCli):
 
         AwsCli.__init__(self)
         self.classname = 'EcrRepository'
-        self.logger = Config0Logger(self.classname,logcategory="cloudprovider")
+
+        self.logger = Config0Logger(self.classname,
+                                    logcategory="cloudprovider")
+
         self.logger.debug("Instantiating %s" % self.classname)
         self.base_cmd = "aws ecr"
         self.product = "ecr"
@@ -31,9 +34,7 @@ class Main(AwsCli):
         output_to_json = kwargs.get("output_to_json",
                                     True)
 
-        _cmd = "{} {} --repository-names {}".format(self.base_cmd,
-                                                    add_cmd,
-                                                    name)
+        _cmd = f"{self.base_cmd} {add_cmd} --repository-names {name}"
         cmd = self.get_cmd_region(_cmd)
 
         results = self.execute(cmd,
@@ -65,7 +66,7 @@ class Main(AwsCli):
 
         if exists.get("status") is not False:
 
-            failed_message = "{} name = {} already exists".format(self.product,name)
+            failed_message = f"{self.product} name = {name} already exists"
 
             if not insert_if_exists: 
                 self.cmd_failed(failed_message=failed_message)
@@ -82,9 +83,7 @@ class Main(AwsCli):
 
             add_cmd = "create-repository"
 
-            _cmd = "{} {} --repository-name {}".format(self.base_cmd,
-                                                       add_cmd,
-                                                       name)
+            _cmd = f"{self.base_cmd} {add_cmd} --repository-name {name}"
 
             cmd = self.get_cmd_region(_cmd)
 
@@ -101,24 +100,32 @@ class Main(AwsCli):
 
         _id = self.get_hash(tags)
 
-        resource = {"raw":{}}
-        resource["raw"][self.product] = output["repository"]
-        resource["registry_id"] = output["repository"]["registryId"]
-        resource["_id"] = _id
-        resource["id"] = _id
-        resource["arn"] = output["repository"]["repositoryArn"] 
-        resource["repository_name"] = name
-        resource["repository_uri"] = output["repository"]["repositoryUri"]
-        resource["name"] = name
-        resource["resource_type"] = self.resource_type
-        resource["provider"] = self.provider
-        resource["region"] = self.aws_default_region
-        resource["aws_default_region"] = self.aws_default_region
-        resource["tags"] = tags
-        resource["destroy"] = {"shelloutconfig":self.shelloutconfig}
-        resource["destroy"]["env_vars"] = json.dumps({ "NAME":name,
-                                                       "METHOD":"destroy",
-                                                       "AWS_DEFAULT_REGION":self.aws_default_region} )
+        resource = {
+            "registry_id": output["repository"]["registryId"],
+            "_id": _id,
+            "id": _id,
+            "arn": output["repository"]["repositoryArn"],
+            "repository_name": name,
+            "repository_uri": output["repository"]["repositoryUri"],
+            "name": name,
+            "resource_type": self.resource_type,
+            "provider": self.provider,
+            "region": self.aws_default_region,
+            "aws_default_region": self.aws_default_region,
+            "tags": tags,
+            "destroy": {
+                "shelloutconfig": self.shelloutconfig,
+                "env_vars": json.dumps(
+                    {"NAME": name,
+                    "METHOD": "destroy",
+                    "AWS_DEFAULT_REGION": self.aws_default_region
+                     }
+                )
+            },
+            "raw": {
+                self.product:output["repository"],
+            }
+        }
 
         self.write_resource_to_json_file(resource)
 
@@ -127,28 +134,23 @@ class Main(AwsCli):
         name = self.inputargs["name"]
         force = self.inputargs.get("force")
 
-        self.logger.debug('Looking to destroy {} name = "{}" in "{}"'.format(self.product,
-                                                                             name,
-                                                                             self.aws_default_region))
+        self.logger.debug(f'Looking to destroy {self.product} name = "{name}" in "{self.aws_default_region}"')
 
         _results = self.exists(output_to_json=False,
                                **self.inputargs)
 
         if not _results.get("status"):
-            output = '{} name = "{}" in "{}" does not exists'.format(self.product,
-                                                                     self.inputargs.get("name"),
-                                                                     self.aws_default_region)
+            output = f'{self.product} name = "{self.inputargs.get("name")}" in "{self.aws_default_region}" does not exists'
             self.successful_output(output=output)
 
         add_cmd = "delete-repository"
 
-        _cmd = "{} {}".format(self.base_cmd,
-                              add_cmd)
+        _cmd = f"{self.base_cmd} {add_cmd}"
 
         if force: 
-            _cmd = "{} --force".format(_cmd)
+            _cmd = f"{_cmd} --force"
 
-        _cmd = "{} --repository-name {}".format(_cmd,name)
+        _cmd = f"{_cmd} --repository-name {name}"
 
         cmd = self.get_cmd_region(_cmd)
 
@@ -157,16 +159,12 @@ class Main(AwsCli):
 
         if results.get("status") is True: 
 
-            self.logger.debug('{} name "{}" destroyed in {}'.format(self.product,
-                                                                    name,
-                                                                    self.aws_default_region))
+            self.logger.debug(f'{self.product} name "{name}" destroyed in {self.aws_default_region}')
             self.successful_output(output=results["output"])
 
         sleep(1)
 
-        failed_message = "could not destroy {} name {} in {}".format(self.product,
-                                                                     name,
-                                                                     self.aws_default_region)
+        failed_message = f"could not destroy {self.product} name {name} in {self.aws_default_region}"
         self.cmd_failed(failed_message=failed_message)
 
 def usage():
