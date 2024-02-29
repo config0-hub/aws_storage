@@ -14,7 +14,7 @@
         {
           "schema_version": 1,
           "attributes": {
-            "arn": "arn:aws:dynamodb:eu-west-1:547111537536:table/test-dynamodb",
+            "arn": "arn:aws:dynamodb:eu-west-1:54711153:table/test-dynamodb",
             "attribute": [
               {
                 "name": "_id",
@@ -53,7 +53,7 @@
             "write_capacity": 0
           },
           "sensitive_attributes": [],
-          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6NjAwMDAwMDAwMDAwLCJ1cGRhdGUiOjM2MDAwMDAwMDAwMDB9LCJzY2hlbWFfdmVyc2lvbiI6IjEifQ=="
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC=="
         }
       ]
     }
