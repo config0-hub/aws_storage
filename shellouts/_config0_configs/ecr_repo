@@ -68,6 +68,8 @@ class Main(AwsCli):
 
             failed_message = f"{self.product} name = {name} already exists"
 
+            self.logger.debug(failed_message)
+
             if not insert_if_exists: 
                 self.cmd_failed(failed_message=failed_message)
 
@@ -80,6 +82,8 @@ class Main(AwsCli):
             output = None
 
         if not output:
+
+            self.logger.debug(f"{self.product} name = {name} being creating"
 
             add_cmd = "create-repository"
 
