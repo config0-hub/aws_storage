@@ -83,7 +83,7 @@ class Main(AwsCli):
 
         if not output:
 
-            self.logger.debug(f"{self.product} name = {name} being creating"
+            self.logger.debug(f"{self.product} name = {name} being creating")
 
             add_cmd = "create-repository"
 
