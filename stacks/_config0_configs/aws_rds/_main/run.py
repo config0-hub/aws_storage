@@ -37,7 +37,7 @@ def run(stackargs):
                              types="float")
 
     stack.parse.add_optional(key="instance_class",
-                             default="db.t2.micro",
+                             default="db.t3.micro",
                              tags="tfvar",
                              types="str")
 
