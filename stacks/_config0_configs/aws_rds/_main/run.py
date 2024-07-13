@@ -22,7 +22,7 @@ def run(stackargs):
                              types="str")
 
     stack.parse.add_optional(key="allocated_storage",
-                             default=10,
+                             default=20,
                              tags="tfvar",
                              types="int")
 
