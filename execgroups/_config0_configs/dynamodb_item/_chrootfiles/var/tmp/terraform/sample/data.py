@@ -15,7 +15,7 @@ aws_default_region = "eu-west-1"
 trigger_id = "123456"
 secret = "secret123"
 branch = "main"
-table_name = "codebuild-shared-config0-eval-settings"
+table_name = "codebuild-ci-settings"
 
 item = { "_id":{"S": trigger_id},
          "codebuild_name":{"S": codebuild_name},
