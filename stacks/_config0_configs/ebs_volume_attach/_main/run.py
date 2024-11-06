@@ -11,8 +11,10 @@ def _get_instance_id(stack):
 
     _info = list(stack.get_resource(**_lookup))[0]
 
-    return _info["instance_id"]
+    if "instance_id" in _info:
+        return _info["instance_id"]
 
+    return _info["id"]
 
 def _get_volume_id(stack):
 
@@ -24,7 +26,10 @@ def _get_volume_id(stack):
 
     _info = list(stack.get_resource(**_lookup))[0]
 
-    return _info["volume_id"]
+    if "volume_id" in _info:
+        return _info["volume_id"]
+
+    return _info["id"]
 
 
 def run(stackargs):
