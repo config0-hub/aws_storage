@@ -42,3 +42,51 @@ resource "aws_db_instance" "default" {
   )
 
 }
+
+output "db_subnet_group_name" {
+  value = aws_db_instance.default.db_subnet_group_name
+}
+
+output "arn" {
+  value = aws_db_instance.default.arn
+}
+
+output "publicly_accessible" {
+  value = aws_db_instance.default.publicly_accessible
+}
+
+output "security_group_names" {
+  value = aws_db_instance.default.security_group_names
+}
+
+output "availability_zone" {
+  value = aws_db_instance.default.availability_zone
+}
+
+output "allocated_storage" {
+  value = aws_db_instance.default.allocated_storage
+}
+
+output "instance_class" {
+  value = aws_db_instance.default.instance_class
+}
+
+output "performance_insights_enabled" {
+  value = aws_db_instance.default.performance_insights_enabled
+}
+
+output "storage_type" {
+  value = aws_db_instance.default.storage_type
+}
+
+output "multi_az" {
+  value = aws_db_instance.default.multi_az
+}
+
+output "engine" {
+  value = aws_db_instance.default.engine
+}
+
+output "engine_version" {
+  value = aws_db_instance.default.engine_version
+}

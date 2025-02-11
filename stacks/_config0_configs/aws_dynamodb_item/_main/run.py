@@ -43,8 +43,7 @@ def run(stackargs):
                        execgroup_name=stack.tf_execgroup.name,
                        provider="aws",
                        resource_name=stack.table_name,
-                       resource_type="db_item",
-                       terraform_type="aws_dynamodb_table_item")
+                       resource_type="db_item")
 
     tf.include(keys=["table_name",
                      "id",

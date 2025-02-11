@@ -87,8 +87,7 @@ def run(stackargs):
                        execgroup_name=stack.tf_execgroup.name,
                        provider="aws",
                        resource_name="attachment_{}".format(stack.volume_name),
-                       resource_type="ebs_volume_attach",
-                       terraform_type="aws_volume_attachment")
+                       resource_type="ebs_volume_attach")
 
     tf.include(keys=["arn"])
 

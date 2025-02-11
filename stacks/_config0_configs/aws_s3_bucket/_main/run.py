@@ -63,8 +63,7 @@ def run(stackargs):
                        execgroup_name=stack.tf_execgroup.name,
                        provider="aws",
                        resource_name=stack.bucket,
-                       resource_type="cloud_storage",
-                       terraform_type="aws_s3_bucket")
+                       resource_type="cloud_storage")
 
     tf.include(keys=["server_side_encryption_configuration",
                      "lifecycle_rule",

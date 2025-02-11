@@ -91,8 +91,7 @@ def run(stackargs):
                        execgroup_name=stack.tf_execgroup.name,
                        provider="aws",
                        resource_name=stack.volume_name,
-                       resource_type="ebs_volume",
-                       terraform_type="aws_ebs_volume")
+                       resource_type="ebs_volume")
 
     tf.include(keys=["availability_zone",
                      "arn",

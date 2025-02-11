@@ -44,8 +44,7 @@ def run(stackargs):
                        execgroup_name=stack.tf_execgroup.name,
                        provider="aws",
                        resource_name=stack.dynamodb_name,
-                       resource_type="aws_dynamodb",
-                       terraform_type="aws_dynamodb_table")
+                       resource_type="aws_dynamodb")
 
     tf.include(keys=["billing_mode",
                      "arn",

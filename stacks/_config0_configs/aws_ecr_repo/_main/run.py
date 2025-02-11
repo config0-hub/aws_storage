@@ -114,8 +114,7 @@ def run(stackargs):
                        execgroup_name=stack.tf_execgroup.name,
                        provider="aws",
                        resource_name=stack.ecr_repo,
-                       resource_type="ecr_repo",
-                       terraform_type="aws_ecr_repository")
+                       resource_type="ecr_repo")
 
     tf.include(keys=["name",
                      "registry_id",

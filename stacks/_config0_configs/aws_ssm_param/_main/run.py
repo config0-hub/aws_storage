@@ -52,8 +52,7 @@ def run(stackargs):
                        execgroup_name=stack.tf_execgroup.name,
                        provider="aws",
                        resource_name=stack.ssm_key,
-                       resource_type="cloud_parameters",
-                       terraform_type="aws_ssm_parameter")
+                       resource_type="cloud_parameters")
 
     tf.include(keys=["key_id",
                      "name",

@@ -184,39 +184,10 @@ def run(stackargs):
                        execgroup_name=stack.tf_execgroup.name,
                        provider="aws",
                        resource_name=stack.rds_name,
-                       resource_type="rds",
-                       terraform_type="aws_db_instance")
+                       resource_type="rds")
 
     tf.include(maps={"db_id":"arn",
                      "id":"arn"})
-
-    tf.include(keys=["arn",
-                     "address",
-                     "allocated_storage",
-                     "allow_major_version_upgrade",
-                     "auto_minor_version_upgrade",
-                     "availability_zone",
-                     "ca_cert_identifier",
-                     "db_name",
-                     "db_subnet_group_name",
-                     "delete_automated_backups",
-                     "endpoint",
-                     "engine",
-                     "engine_version",
-                     "engine_version_actual",
-                     "hosted_zone_id",
-                     "identifier",
-                     "instance_class",
-                     "multi_az",
-                     "network_type",
-                     "performance_insights_enabled",
-                     "port",
-                     "publicly_accessible",
-                     "resource_id",
-                     "security_group_names",
-                     "skip_final_snapshot",
-                     "storage_encrypted",
-                     "storage_type"])
 
     output_keys = ["db_subnet_group_name",
                    "arn",
@@ -225,7 +196,6 @@ def run(stackargs):
                    "availability_zone",
                    "allocated_storage",
                    "instance_class",
-                   "port",
                    "performance_insights_enabled",
                    "storage_type",
                    "multi_az",
