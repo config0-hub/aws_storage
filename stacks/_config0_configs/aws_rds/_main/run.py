@@ -192,7 +192,6 @@ def run(stackargs):
     output_keys = ["db_subnet_group_name",
                    "arn",
                    "publicly_accessible",
-                   "security_group_names",
                    "availability_zone",
                    "allocated_storage",
                    "instance_class",

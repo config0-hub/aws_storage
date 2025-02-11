@@ -55,10 +55,6 @@ output "publicly_accessible" {
   value = aws_db_instance.default.publicly_accessible
 }
 
-output "security_group_names" {
-  value = aws_db_instance.default.security_group_names
-}
-
 output "availability_zone" {
   value = aws_db_instance.default.availability_zone
 }
