@@ -186,8 +186,7 @@ def run(stackargs):
                        resource_name=stack.rds_name,
                        resource_type="rds")
 
-    tf.include(maps={"db_id":"arn",
-                     "id":"arn"})
+    tf.include(maps={"db_id":"arn","id":"arn"})
 
     output_keys = ["db_subnet_group_name",
                    "arn",

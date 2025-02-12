@@ -9,12 +9,7 @@ def _get_instance_id(stack):
                "hostname" : stack.hostname,
                "region" : stack.aws_default_region}
 
-    _info = list(stack.get_resource(**_lookup))[0]
-
-    if "instance_id" in _info:
-        return _info["instance_id"]
-
-    return _info["id"]
+    return list(stack.get_resource(**_lookup))[0]["instance_id"]
 
 def _get_volume_id(stack):
 
@@ -24,13 +19,7 @@ def _get_volume_id(stack):
                 "resource_type" : "ebs_volume",
                 "region" : stack.aws_default_region}
 
-    _info = list(stack.get_resource(**_lookup))[0]
-
-    if "volume_id" in _info:
-        return _info["volume_id"]
-
-    return _info["id"]
-
+    return list(stack.get_resource(**_lookup))[0]["volume_id"]
 
 def run(stackargs):
 
@@ -89,9 +78,12 @@ def run(stackargs):
                        resource_name="attachment_{}".format(stack.volume_name),
                        resource_type="ebs_volume_attach")
 
-    tf.include(keys=["arn"])
+    tf.include(values={
+        "aws_default_region":stack.aws_default_region
+    })
 
-    tf.include(maps= {"id":"arn"})
+    # resource output to show on saas ui
+    tf.output(keys=["arn"])
 
     # finalize the tf_executor
     stack.tf_executor.insert(display=True,

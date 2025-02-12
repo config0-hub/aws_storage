@@ -116,19 +116,14 @@ def run(stackargs):
                        resource_name=stack.ecr_repo,
                        resource_type="ecr_repo")
 
-    tf.include(keys=["name",
-                     "registry_id",
-                     "repository_url",
-                     "arn",
-                     "id"])
 
-    tf.include(maps={"id":"arn",
-                     "repository_uri":"repository_url"})
+    tf.include(values={
+        "aws_default_region":stack.aws_default_region,
+        "ecr_repo":stack.ecr_repo,
+    })
 
-    tf.output(keys=["arn",
-                    "name",
-                    "repository_uri",
-                    "resource_type"])
+    tf.include(maps={"repository_uri":"repository_url"})
+    tf.output(keys=["arn", "repository_uri"])
 
     # finalize the tf_executor
     stack.tf_executor.insert(display=True,

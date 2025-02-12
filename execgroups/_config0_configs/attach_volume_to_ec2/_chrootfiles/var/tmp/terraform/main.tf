@@ -4,3 +4,7 @@ resource "aws_volume_attachment" "data-vol-attachment" {
  instance_id  = var.instance_id
  force_detach = true
 }
+
+output "arn" {
+  value = aws_volume_attachment.data-vol-attachment.arn
+}

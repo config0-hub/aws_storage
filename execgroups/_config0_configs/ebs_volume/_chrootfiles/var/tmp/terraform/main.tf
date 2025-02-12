@@ -14,5 +14,14 @@ resource "aws_ebs_volume" "data-vol" {
  type = var.volume_type
 }
 
+output "availability_zone" {
+  value = var.availability_zone
+}
 
+output "arn" {
+  value = aws_ebs_volume.data-vol.arn
+}
 
+output "volume_id" {
+  value = aws_ebs_volume.data-vol.id
+}

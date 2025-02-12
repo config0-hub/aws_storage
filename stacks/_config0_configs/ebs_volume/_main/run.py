@@ -93,11 +93,12 @@ def run(stackargs):
                        resource_name=stack.volume_name,
                        resource_type="ebs_volume")
 
-    tf.include(keys=["availability_zone",
-                     "arn",
-                     "id"])
+    tf.include(values={
+        "aws_default_region":stack.aws_default_region
+    })
 
-    tf.include(maps={"volume_id":"id"})
+    # resource output to show on saas ui
+    tf.output(keys=["volume_id"])
 
     # finalize the tf_executor
     stack.tf_executor.insert(display=True,

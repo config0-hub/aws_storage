@@ -16,3 +16,15 @@ resource "aws_ecr_lifecycle_policy" "lifecycle_policy" {
   repository = aws_ecr_repository.ecr_repository.name
   policy     = var.lifecycle_policy
 }
+
+output "registry_id" {
+  value = aws_ecr_repository.ecr_repository.registry_id
+}
+
+output "repository_url" {
+  value = aws_ecr_repository.ecr_repository.repository_url
+}
+
+output "arn" {
+  value = aws_ecr_repository.ecr_repository.arn
+}
