@@ -46,20 +46,16 @@ def run(stackargs):
                        resource_name=stack.dynamodb_name,
                        resource_type="aws_dynamodb")
 
-    tf.include(keys=["billing_mode",
-                     "arn",
-                     "hash_key",
-                     "name",
-                     "ttl"])
+    tf.include(values={
+        "aws_default_region":stack.aws_default_region,
+        "dynamodb_table":stack.dynamodb_name
+    })
 
     tf.include(maps={"id":"arn"})
 
     tf.output(keys=["billing_mode",
                     "arn",
-                    "hash_key",
-                    "name",
-                    "ttl",
-                    "resource_type"])
+                    "hash_key"])
 
     # finalize the tf_executor
     stack.tf_executor.insert(display=True,

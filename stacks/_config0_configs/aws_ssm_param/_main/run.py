@@ -54,19 +54,14 @@ def run(stackargs):
                        resource_name=stack.ssm_key,
                        resource_type="cloud_parameters")
 
-    tf.include(keys=["key_id",
-                     "name",
-                     "tier",
-                     "type",
-                     "id"])
+    tf.include(values={
+        "aws_default_region":stack.aws_default_region,
+        "ssm_name":stack.ssm_key,
+        "ssm_key": stack.ssm_key
+    })
 
     tf.include(maps= {"ssm_ref": "name"})
-
-    tf.output(keys=["key_id",
-                    "tier",
-                    "type",
-                    "name",
-                    "resource_type"])
+    tf.output(keys=["ssm_key"])
 
     # finalize the tf_executor
     stack.tf_executor.insert(display=True,

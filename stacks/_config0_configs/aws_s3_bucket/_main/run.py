@@ -65,21 +65,14 @@ def run(stackargs):
                        resource_name=stack.bucket,
                        resource_type="cloud_storage")
 
-    tf.include(keys=["server_side_encryption_configuration",
-                     "lifecycle_rule",
-                     "versioning",
-                     "arn",
-                     "id"])
+    tf.include(values={
+        "aws_default_region":stack.aws_default_region,
+        "bucket":stack.bucket,
+        "s3_bucket": stack.bucket
+    })
 
     tf.include(maps={"id":"arn"})
-
-    tf.output(keys=["arn",
-                    "name",
-                    "expire_days",
-                    "encryption",
-                    "noncurrent_version_expiration",
-                    "bucket_versioning",
-                    "resource_type"])
+    tf.output(keys=["arn"])
 
     # finalize the tf_executor
     stack.tf_executor.insert(display=True,

@@ -45,11 +45,9 @@ def run(stackargs):
                        resource_name=stack.table_name,
                        resource_type="db_item")
 
-    tf.include(keys=["table_name",
-                     "id",
-                     "timeout"])
-
-    tf.include(maps={"name":"table_name"})
+    tf.include(values={
+        "aws_default_region":stack.aws_default_region
+    })
 
     # finalize the tf_executor
     stack.tf_executor.insert(display=True,

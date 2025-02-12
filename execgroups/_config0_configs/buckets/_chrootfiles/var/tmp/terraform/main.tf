@@ -72,23 +72,23 @@ resource "aws_s3_bucket" "default" {
   }
 }
 
-#  dynamic "default_action" {
-#    for_each = var.maintenance_mode ? [] : [1]
-#    content {
-#      type             = "forward"
-#      target_group_arn = aws_lb_target_group.this.arn
-#    }
-#  }
-#
-#  dynamic "default_action" {
-#    for_each = var.maintenance_mode ? [1] : []
-#    content {
-#      type = "fixed-response"
-#      fixed_response {
-#        content_type = "text/html"
-#        message_body = file("${path.module}/pages/scheduled-maintenance.html")
-#        status_code  = "503"
-#      }
-#    }
-#  }
+output "arn" {
+  value = aws_s3_bucket.default.arn
+}
 
+#output "expire_days" {
+#  value = aws_s3_bucket.default.lifecycle_rule[0].expiration[0].days  # Replace if using expiration
+#}
+#
+#output "encryption" {
+#  value = aws_s3_bucket.default.server_side_encryption_configuration[0].rule[0].apply_server_side_encryption_by_default[0].sse_algorithm
+#}
+#
+#output "noncurrent_version_expiration" {
+#  value = aws_s3_bucket.default.noncurrent_version_expiration[0].days  # Adjust if using noncurrent version expiration
+#}
+#
+#output "bucket_versioning" {
+#  value = aws_s3_bucket.default.versioning[0].enabled
+#}
+#
