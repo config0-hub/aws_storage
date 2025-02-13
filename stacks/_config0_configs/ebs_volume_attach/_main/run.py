@@ -82,9 +82,6 @@ def run(stackargs):
         "aws_default_region":stack.aws_default_region
     })
 
-    # resource output to show on saas ui
-    tf.output(keys=["arn"])
-
     # finalize the tf_executor
     stack.tf_executor.insert(display=True,
                              **tf.get())

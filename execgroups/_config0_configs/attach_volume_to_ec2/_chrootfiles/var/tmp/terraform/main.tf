@@ -5,6 +5,6 @@ resource "aws_volume_attachment" "data-vol-attachment" {
  force_detach = true
 }
 
-output "arn" {
-  value = aws_volume_attachment.data-vol-attachment.arn
-}
+#output "arn" {
+#  value = aws_volume_attachment.data-vol-attachment.arn
+#}
