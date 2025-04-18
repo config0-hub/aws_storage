@@ -20,7 +20,7 @@ from config0_publisher.terraform import TFConstructor
 
 def run(stackargs):
 
-    # instantiate authoring stack
+    # Instantiate authoring stack
     stack = newStack(stackargs)
 
     # Add default variables
@@ -63,8 +63,7 @@ def run(stackargs):
         stack.set_variable("ssm_description",
                            f"The ssm parameter for key = {stack.ssm_key}")
 
-    # use the terraform constructor (helper)
-    # but this is optional
+    # Use the terraform constructor (helper)
     tf = TFConstructor(stack=stack,
                        execgroup_name=stack.tf_execgroup.name,
                        provider="aws",
@@ -80,7 +79,7 @@ def run(stackargs):
     tf.include(maps={"ssm_ref": "name"})
     tf.output(keys=["ssm_key"])
 
-    # finalize the tf_executor
+    # Finalize the tf_executor
     stack.tf_executor.insert(display=True,
                              **tf.get())
 

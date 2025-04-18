@@ -4,17 +4,15 @@ author: Gary Leong <gary@config0.com>
 license: GPL-3.0
 categories: 
    - aws
-   - ec2
    - buckets
    - s3
    - cloud
    - public_cloud
 tags:
-   - ssm
-   - parameter
-   - parameter_store
-   - ec2
+   - storage
    - buckets
    - s3
    - aws
    - infrastructure
+   - lifecycle
+   - versioning

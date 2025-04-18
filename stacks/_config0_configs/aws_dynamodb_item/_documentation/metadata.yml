@@ -1,4 +1,4 @@
-desc: The stack inserts a single item into an existing DynamoDB table.
+desc: Creates and manages a DynamoDB item in an existing AWS DynamoDB table.
 release: 0.0.1
 author: Gary Leong <gary@config0.com>
 license: GPLv3

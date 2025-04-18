@@ -9,9 +9,9 @@ This stack creates and configures an AWS RDS MySQL database instance with custom
 
 | Name | Description | Default |
 |------|-------------|---------|
-| subnet_ids | Subnet ID list | |
-| sg_id | Security group ID | |
-| rds_name | Configuration for name | |
+| subnet_ids | Subnet ID list | &nbsp; |
+| sg_id | Security group ID | &nbsp; |
+| rds_name | Configuration for name | &nbsp; |
 
 ### Optional Variables
 
@@ -37,27 +37,24 @@ This stack creates and configures an AWS RDS MySQL database instance with custom
 | rds_master_password | Database admin password | `None` |
 | aws_default_region | Default AWS region | `eu-west-1` |
 | publish_creds | Configuration for publish creds | `None` |
-| publish_to_saas | boolean to publish values to config0 SaaS UI | `None` |
-| timeout | Configuration for timeout | `2700` |
-
-## Features
-- Creates a managed MySQL RDS instance in AWS
-- Configures security groups and subnet associations
-- Generates random master username and password if not provided
-- Supports publishing credentials to the Config0 SaaS UI
-- Customizable instance size, storage, and backup configurations
+| publish_to_saas | Boolean to publish values to config0 SaaS UI | `None` |
 
 ## Dependencies
 
 ### Substacks
-- [config0-publish:::tf_executor](https://api-app.config0.com/web_api/v1.0/stacks/config0-publish/tf_executor)
+- [config0-publish:::tf_executor](http://config0.http.redirects.s3-website-us-east-1.amazonaws.com/assets/stacks/config0-publish/tf_executor/default)
 
 ### Execgroups
-- [config0-publish:::aws_storage::rds](https://api-app.config0.com/web_api/v1.0/exec/groups/config0-publish/aws_storage/rds)
+- [config0-publish:::aws_storage::rds](http://config0.http.redirects.s3-website-us-east-1.amazonaws.com/assets/exec/groups/config0-publish/aws_storage/rds/default)
+
+### Shelloutconfigs
+- [config0-publish:::terraform::resource_wrapper](http://config0.http.redirects.s3-website-us-east-1.amazonaws.com/assets/shelloutconfigs/config0-publish/terraform/resource_wrapper/default)
 
 ## License
+<pre>
 Copyright (C) 2025 Gary Leong <gary@config0.com>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, version 3 of the License.
+</pre>

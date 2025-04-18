@@ -8,7 +8,7 @@ This stack creates an AWS Elastic Block Storage (EBS) volume in a specified avai
 ### Required
 | Name | Description | Default |
 |------|-------------|---------|
-| volume_name | Storage volume name | |
+| volume_name | Storage volume name | &nbsp; |
 | volume_size | Storage volume size (GB) | 10 |
 
 ### Optional
@@ -19,22 +19,22 @@ This stack creates an AWS Elastic Block Storage (EBS) volume in a specified avai
 | instance_id | EC2 instance ID | null |
 | aws_default_region | Default AWS region | eu-west-1 |
 
-## Features
-- Automatic availability zone detection from an existing EC2 instance
-- Creates a named EBS volume with specified size
-- Reports volume ID for easy reference
-
 ## Dependencies
 
 ### Substacks
-- [config0-publish:::tf_executor](https://api-app.config0.com/web_api/v1.0/stacks/config0-publish/tf_executor)
+- [config0-publish:::tf_executor](http://config0.http.redirects.s3-website-us-east-1.amazonaws.com/assets/stacks/config0-publish/tf_executor/default)
 
 ### Execgroups
-- [config0-publish:::aws_storage::ebs_volume](https://api-app.config0.com/web_api/v1.0/exec/groups/config0-publish/aws_storage/ebs_volume)
+- [config0-publish:::aws_storage::ebs_volume](http://config0.http.redirects.s3-website-us-east-1.amazonaws.com/assets/exec/groups/config0-publish/aws_storage/ebs_volume/default)
+
+### Shelloutconfigs
+- [config0-publish:::terraform::resource_wrapper](http://config0.http.redirects.s3-website-us-east-1.amazonaws.com/assets/shelloutconfigs/config0-publish/terraform/resource_wrapper/default)
 
 ## License
+<pre>
 Copyright (C) 2025 Gary Leong <gary@config0.com>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, version 3 of the License.
+</pre>

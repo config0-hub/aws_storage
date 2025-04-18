@@ -19,7 +19,6 @@ from config0_publisher.terraform import TFConstructor
 
 
 def _get_instance_id(stack):
-
     _lookup = {
         "must_exists": True,
         "must_be_one": True,
@@ -32,7 +31,6 @@ def _get_instance_id(stack):
 
 
 def _get_volume_id(stack):
-
     _lookup = {
         "must_exists": True,
         "must_be_one": True,
@@ -45,7 +43,6 @@ def _get_volume_id(stack):
 
 
 def run(stackargs):
-
     # instantiate authoring stack
     stack = newStack(stackargs)
 

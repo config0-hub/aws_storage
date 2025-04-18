@@ -166,28 +166,22 @@ def run(stackargs):
 
     # set username and password
     if not stack.get_attr("rds_master_username") and stack.inputvars.get("DB_MASTER_USERNAME"):
-
         stack.set_variable("rds_master_username",
                            stack.inputvars["DB_MASTER_USERNAME"],
                            tags="tfvar",
                            types="str")
-
     elif not stack.get_attr("rds_master_username"):
-
         stack.set_variable("rds_master_username",
                            stack.random_id(size=20),
                            tags="tfvar",
                            types="str")
 
     if not stack.get_attr("rds_master_password") and stack.inputvars.get("DB_MASTER_PASSWORD"):
-
         stack.set_variable("rds_master_password",
                            stack.inputvars["DB_MASTER_PASSWORD"],
                            tags="tfvar",
                            types="str")
-
     elif not stack.get_attr("rds_master_password"):
-
         stack.set_variable("rds_master_password",
                            stack.random_id(size=20),
                            tags="tfvar",
@@ -196,40 +190,39 @@ def run(stackargs):
     stack.set_variable("timeout", 2700)
 
     # use the terraform constructor (helper)
-    # but this is optional
     tf = TFConstructor(stack=stack,
                        execgroup_name=stack.tf_execgroup.name,
                        provider="aws",
                        resource_name=stack.rds_name,
                        resource_type="rds")
 
-    tf.include(maps={"db_id":"arn", "id":"arn"})
+    tf.include(maps={"db_id": "arn", "id": "arn"})
 
-    output_keys = ["db_subnet_group_name",
-                   "arn",
-                   "publicly_accessible",
-                   "availability_zone",
-                   "allocated_storage",
-                   "instance_class",
-                   "performance_insights_enabled",
-                   "storage_type",
-                   "multi_az",
-                   "engine",
-                   "engine_version"]
+    output_keys = [
+        "db_subnet_group_name",
+        "arn",
+        "publicly_accessible",
+        "availability_zone",
+        "allocated_storage",
+        "instance_class",
+        "performance_insights_enabled",
+        "storage_type",
+        "multi_az",
+        "engine",
+        "engine_version"
+    ]
 
     tf.output(keys=output_keys)
 
     # finalize the tf_executor
-    stack.tf_executor.insert(display=True,
-                             **tf.get())
+    stack.tf_executor.insert(display=True, **tf.get())
 
-    # put outs onto the saas ui (optional)
+    # put outputs onto the saas ui (optional)
     if stack.get_attr("publish_creds") or stack.get_attr("publish_to_saas"):
-
-        _cred_outputs = {f"{stack.engine}_root_user": stack.rds_master_username,
-                         f"{stack.engine}_root_password": stack.rds_master_password,
-                         f"{stack.engine}_root_password": stack.rds_master_password}
-
+        _cred_outputs = {
+            f"{stack.engine}_root_user": stack.rds_master_username,
+            f"{stack.engine}_root_password": stack.rds_master_password
+        }
         stack.publish(_cred_outputs)
 
     return stack.get_results()

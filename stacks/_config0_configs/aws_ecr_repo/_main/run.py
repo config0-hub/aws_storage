@@ -66,19 +66,19 @@ def run(stackargs):
                              tags="tfvar,db,resource,tf_exec_env",
                              types="str")
 
-    # add execgroup
+    # Add execgroup
     stack.add_execgroup("config0-publish:::aws_storage::ecr_repo",
                         "tf_execgroup")
 
-    # add substack
+    # Add substack
     stack.add_substack("config0-publish:::tf_executor")
 
-    # initialize Variables in stack
+    # Initialize Variables in stack
     stack.init_variables()
     stack.init_execgroups()
     stack.init_substacks()
 
-    # check if ecr repo exists and is in Config0 db
+    # Check if ECR repo exists and is in Config0 db
     _repo = stack.check_resource(
             name=stack.ecr_repo,
             resource_type="ecr_repo",
@@ -86,7 +86,7 @@ def run(stackargs):
     )
 
     if _repo:
-        msg = f'ecr_repo name {stack.ecr_repo} exists - creation not needed'
+        msg = f'ECR repo name {stack.ecr_repo} exists - creation not needed'
         stack.logger.debug(msg)
         cmd = "sleep 1"
         stack.add_external_cmd(cmd=cmd,
@@ -96,11 +96,10 @@ def run(stackargs):
                                role="external/cli/execute")
         return stack.get_results()
 
-    # check if ecr repo exists and is not in Config0 db
+    # Check if ECR repo exists in AWS but is not in Config0 db
     values = get_ecr_repo(stack)
 
     if values:
-
         inputargs = {
             "cluster": stack.cluster,
             "instance": stack.instance,
@@ -119,14 +118,14 @@ def run(stackargs):
         values["id"] = _id
 
         inputargs["values"] = values
-        human_description = f'adding resource_type "{values["resource_type"]}" id "{_id}"'
+        human_description = f'Adding resource_type "{values["resource_type"]}" id "{_id}"'
         inputargs["human_description"] = human_description
 
         stack.add_resource(**inputargs)
 
         return stack.get_results()
 
-    # create ecr repo from scratch
+    # Create ECR repo from scratch
     tf = TFConstructor(stack=stack,
                        execgroup_name=stack.tf_execgroup.name,
                        provider="aws",
@@ -141,7 +140,7 @@ def run(stackargs):
     tf.include(maps={"repository_uri": "repository_url"})
     tf.output(keys=["arn", "repository_uri"])
 
-    # finalize the tf_executor
+    # Finalize the tf_executor
     stack.tf_executor.insert(display=True,
                              **tf.get())
 
