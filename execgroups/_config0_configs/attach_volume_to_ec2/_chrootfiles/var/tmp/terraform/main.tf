@@ -1,3 +1,4 @@
+# Attaches an EBS volume to an EC2 instance
 resource "aws_volume_attachment" "data-vol-attachment" {
   device_name  = var.device_name
   volume_id    = var.volume_id
@@ -5,6 +6,3 @@ resource "aws_volume_attachment" "data-vol-attachment" {
   force_detach = true
 }
 
-#output "arn" {
-#  value = aws_volume_attachment.data-vol-attachment.arn
-#}

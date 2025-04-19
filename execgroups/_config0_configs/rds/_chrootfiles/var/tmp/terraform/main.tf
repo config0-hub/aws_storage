@@ -1,10 +1,18 @@
 resource "aws_db_subnet_group" "default" {
-  name       = var.db_subnet_name
-  subnet_ids = var.subnet_ids
+  name        = var.db_subnet_name
+  subnet_ids  = var.subnet_ids
+  description = "Subnet group for RDS instance ${var.rds_name}"
+
+  tags = merge(
+    var.cloud_tags,
+    {
+      Name    = var.db_subnet_name
+      Product = "rds"
+    },
+  )
 }
 
 resource "aws_db_instance" "default" {
-
   identifier = var.rds_name
 
   db_subnet_group_name   = aws_db_subnet_group.default.id
@@ -25,11 +33,6 @@ resource "aws_db_instance" "default" {
   storage_encrypted   = var.storage_encrypted
   storage_type        = var.storage_type
 
-  # revisit if backup wanted
-  #backup_retention_period = var.backup_retention_period
-  #backup_window           = var.backup_window
-  #maintenance_window      = var.maintenance_window
-
   allow_major_version_upgrade = var.allow_major_version_upgrade
   auto_minor_version_upgrade  = var.auto_minor_version_upgrade
   skip_final_snapshot         = var.skip_final_snapshot
@@ -37,52 +40,16 @@ resource "aws_db_instance" "default" {
   tags = merge(
     var.cloud_tags,
     {
+      Name    = var.rds_name
       Product = "rds"
     },
   )
-
 }
 
-output "db_subnet_group_name" {
-  value = aws_db_instance.default.db_subnet_group_name
-}
+/*
+# Backup configuration is commented out. 
+backup_retention_period = var.backup_retention_period
+backup_window           = var.backup_window
+maintenance_window      = var.maintenance_window
+*/
 
-output "arn" {
-  value = aws_db_instance.default.arn
-}
-
-output "publicly_accessible" {
-  value = aws_db_instance.default.publicly_accessible
-}
-
-output "availability_zone" {
-  value = aws_db_instance.default.availability_zone
-}
-
-output "allocated_storage" {
-  value = aws_db_instance.default.allocated_storage
-}
-
-output "instance_class" {
-  value = aws_db_instance.default.instance_class
-}
-
-output "performance_insights_enabled" {
-  value = aws_db_instance.default.performance_insights_enabled
-}
-
-output "storage_type" {
-  value = aws_db_instance.default.storage_type
-}
-
-output "multi_az" {
-  value = aws_db_instance.default.multi_az
-}
-
-output "engine" {
-  value = aws_db_instance.default.engine
-}
-
-output "engine_version" {
-  value = aws_db_instance.default.engine_version
-}

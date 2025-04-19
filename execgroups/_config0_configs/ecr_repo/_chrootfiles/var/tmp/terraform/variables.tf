@@ -1,42 +1,48 @@
 variable "aws_default_region" {
-  default = "us-east-1"
+  description = "The AWS region where resources will be created"
+  type        = string
+  default     = "us-east-1"
 }
 
 variable "ecr_repo" {
-  type = string
+  description = "Name of the ECR repository to create"
+  type        = string
 }
 
 variable "image_tag_mutability" {
-  type    = string
-  default = "MUTABLE"
+  description = "The tag mutability setting for the repository. Valid values are MUTABLE or IMMUTABLE"
+  type        = string
+  default     = "MUTABLE"
 }
 
 variable "image_scanning_configuration" {
-  type        = map(any)
-  description = "Configuration block that defines image scanning configuration for the repository. By default, image scanning must be manually triggered. See the ECR User Guide for more information about image scanning."
+  description = "Configuration block that defines image scanning configuration for the repository"
+  type        = map(string)
   default     = {}
 }
 
 variable "tags" {
-  type        = map(any)
-  description = "A map of tags to assign to the resource"
+  description = "A map of tags to assign to the ECR repository"
+  type        = map(string)
   default     = {}
 }
 
 variable "scan_on_push" {
-  type        = bool
   description = "Indicates whether images are scanned after being pushed to the repository (true) or not scanned (false)"
-  default     = "true"
+  type        = bool
+  default     = true
 }
 
 variable "cloud_tags" {
-  description = "additional tags as a map"
+  description = "Additional tags as a map"
   type        = map(string)
   default     = {}
 }
 
 variable "lifecycle_policy" {
-  default = <<EOF
+  description = "JSON formatted ECR lifecycle policy to apply to the repository"
+  type        = string
+  default     = <<EOF
 {
     "rules": [
         {
@@ -57,25 +63,3 @@ variable "lifecycle_policy" {
 EOF
 }
 
-################################################
-# Below doesn't work
-################################################
-
-#variable "encryption_configuration" {
-#  type        = map
-#  description = "Encryption configuration for the repository"
-#  default     = {}
-#}
-#
-#
-#variable "encryption_type" {
-#  type        = string
-#  description = "The encryption type to use for the repository. Valid values are AES256 or KMS. Defaults to AES256"
-#  default     = "KMS"
-#}
-#
-#variable "kms_key" {
-#  type        = string
-#  default     = ""
-#}
-#

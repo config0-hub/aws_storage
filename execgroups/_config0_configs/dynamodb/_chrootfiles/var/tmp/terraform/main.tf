@@ -21,14 +21,3 @@ resource "aws_dynamodb_table" "default" {
   )
 }
 
-output "billing_mode" {
-  value = aws_dynamodb_table.default.billing_mode
-}
-
-output "arn" {
-  value = aws_dynamodb_table.default.arn
-}
-
-output "hash_key" {
-  value = aws_dynamodb_table.default.hash_key
-}

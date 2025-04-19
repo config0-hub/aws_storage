@@ -1,8 +1,8 @@
 resource "aws_ebs_volume" "data-vol" {
-
   availability_zone = var.availability_zone
   size              = var.volume_size
   encrypted         = true
+  type              = var.volume_type
 
   tags = merge(
     var.cloud_tags,
@@ -11,17 +11,5 @@ resource "aws_ebs_volume" "data-vol" {
       Product = "ebs"
     },
   )
-  type = var.volume_type
 }
 
-output "availability_zone" {
-  value = var.availability_zone
-}
-
-output "arn" {
-  value = aws_ebs_volume.data-vol.arn
-}
-
-output "volume_id" {
-  value = aws_ebs_volume.data-vol.id
-}
