@@ -5,7 +5,6 @@
   become: true
   become_method: sudo
   gather_facts: true
-    - all
   roles:
     - ../roles/get_vol
     - ../roles/mount
