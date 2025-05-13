@@ -8,6 +8,11 @@ output "repository_url" {
   value       = aws_ecr_repository.ecr_repository.repository_url
 }
 
+output "repository_uri" {
+  description = "The URI of the repository"
+  value       = aws_ecr_repository.ecr_repository.repository_url
+}
+
 output "arn" {
   description = "Full ARN of the repository"
   value       = aws_ecr_repository.ecr_repository.arn
