@@ -223,6 +223,6 @@ def run(stackargs):
             f"{stack.engine}_root_user": stack.rds_master_username,
             f"{stack.engine}_root_password": stack.rds_master_password
         }
-        stack.publish(_cred_outputs)
+        stack.output_to_ui(_cred_outputs)
 
     return stack.get_results()
