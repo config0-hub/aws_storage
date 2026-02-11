@@ -1,0 +1,21 @@
+desc: Creates an AWS RDS MySQL database instance with configurable parameters, security groups, and subnet associations
+release: 0.0.1
+author: Gary Leong <gary@config0.com>
+license: GNU General Public License v3.0
+categories:
+   - aws
+   - rds
+   - database
+   - cloud
+   - public_cloud
+   - terraform
+tags:
+   - terraform
+   - rds
+   - database
+   - aws
+   - infrastructure
+   - featured_infrastructure
+   - featured
+   - cloud
+   - public_cloud

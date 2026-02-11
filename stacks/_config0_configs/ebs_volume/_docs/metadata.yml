@@ -1,0 +1,15 @@
+desc: Creates an AWS EBS volume with specified size and availability zone
+release: 0.0.1
+author: Gary Leong <gary@config0.com>
+license: GPL-3.0
+categories:
+   - aws
+   - ec2
+   - cloud
+   - public_cloud
+tags:
+   - ec2
+   - storage
+   - ebs
+   - aws
+   - infrastructure

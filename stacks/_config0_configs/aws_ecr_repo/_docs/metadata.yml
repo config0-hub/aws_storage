@@ -1,0 +1,20 @@
+desc: Creates and manages AWS ECR repositories for Docker container images
+release: 0.0.1
+author: Gary Leong <gary@config0.com>
+license: GNU General Public License v3.0
+categories: 
+   - aws
+   - cloud
+   - public_cloud
+   - feature
+   - infrastructure
+tags:
+   - aws
+   - infrastructure
+   - feature
+   - ecr_repo
+   - ecr
+   - registry
+   - docker
+   - repository
+   - public_cloud

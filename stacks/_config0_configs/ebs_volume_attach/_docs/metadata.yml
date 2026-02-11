@@ -1,0 +1,15 @@
+desc: Attaches an existing EBS volume to an EC2 instance by retrieving instance and volume IDs using hostname and volume name.
+release: 0.0.1
+author: Gary Leong <gary@config0.com>
+license: GPL-3.0
+categories: 
+   - ec2
+   - volume
+   - ebs
+tags:
+   - ec2
+   - volume
+   - ebs
+   - aws
+   - cloud
+   - public_cloud

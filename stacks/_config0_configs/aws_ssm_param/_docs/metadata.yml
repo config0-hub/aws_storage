@@ -1,0 +1,19 @@
+desc: Securely stores and manages configuration data in AWS SSM Parameter Store
+release: 0.0.1
+author: Gary Leong <gary@config0.com>
+license: GNU General Public License v3.0
+categories: 
+   - aws
+   - ec2
+   - secrets
+   - cloud
+   - public_cloud
+tags:
+   - ssm
+   - parameter
+   - parameter_store
+   - ec2
+   - secrets
+   - host
+   - aws
+   - infrastructure
