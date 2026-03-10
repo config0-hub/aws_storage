@@ -1,15 +1,14 @@
 desc: Creates an AWS DynamoDB table with configurable hash key and billing mode
-release: 0.0.1
+release: 0.3.0
 author: Gary Leong <gary@config0.com>
-license: GNU General Public License v3.0
-categories: 
+license: GPL-3.0
+categories:
    - aws
-   - cloud
-   - public_cloud
+   - database
+   - terraform
 tags:
    - dynamodb
    - database
-   - db
-   - nosql
    - aws
-   - infrastructure
+   - terraform
+   - nosql

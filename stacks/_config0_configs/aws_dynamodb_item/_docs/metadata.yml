@@ -1,15 +1,14 @@
 desc: Creates and manages a DynamoDB item in an existing AWS DynamoDB table.
-release: 0.0.1
+release: 0.1.0
 author: Gary Leong <gary@config0.com>
-license: GPLv3
-categories: 
+license: GPL-3.0
+categories:
    - aws
-   - cloud
-   - public_cloud
+   - database
+   - terraform
 tags:
    - dynamodb
    - database
-   - db
-   - nosql
    - aws
-   - infrastructure
+   - terraform
+   - nosql

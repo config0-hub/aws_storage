@@ -1,18 +1,13 @@
 desc: Creates an S3 bucket in AWS with configurable options for versioning, lifecycle rules, and access control.
-release: 0.0.1
+release: 0.3.0
 author: Gary Leong <gary@config0.com>
 license: GPL-3.0
-categories: 
+categories:
    - aws
-   - buckets
-   - s3
-   - cloud
-   - public_cloud
+   - terraform
 tags:
-   - storage
-   - buckets
    - s3
    - aws
-   - infrastructure
-   - lifecycle
+   - terraform
+   - storage
    - versioning
