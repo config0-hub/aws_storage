@@ -51,7 +51,7 @@ def run(stackargs):
     stack.parse.add_optional(key="engine_version",
                              default="8.0.35",
                              tags="tfvar",
-                             types="float")
+                             types="str")
 
     stack.parse.add_optional(key="instance_class",
                              default="db.t3.micro",
