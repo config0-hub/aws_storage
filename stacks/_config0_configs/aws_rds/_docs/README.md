@@ -20,7 +20,7 @@ This stack creates and configures an AWS RDS MySQL database instance with custom
 | db_name | Database name | `_random` |
 | allocated_storage | Database allocated storage | `30` |
 | engine | Database engine | `MySQL` |
-| engine_version | Database engine version | `8.0.35` |
+| engine_version | Database engine version | `8.0.46` |
 | instance_class | Database instance type | `db.t3.micro` |
 | multi_az | Enable multi-AZ deployment | `false` |
 | storage_type | Database storage type | `gp2` |
