@@ -29,7 +29,7 @@ def run(stackargs):
                              types="str")
 
     stack.parse.add_required(key="acl",
-                             default="_random",
+                             default="private",
                              tags="tfvar",
                              types="str")
 
