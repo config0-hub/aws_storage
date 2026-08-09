@@ -51,3 +51,8 @@ variable "cloud_tags" {
   default     = {}
 }
 
+variable "engine_write_access" {
+  description = "Allow the tenant's config0-xe-codebuild engine role to PutObject into this bucket"
+  type        = bool
+  default     = false
+}

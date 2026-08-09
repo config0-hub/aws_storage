@@ -53,6 +53,11 @@ def run(stackargs):
                              default=None,
                              types="bool")
 
+    stack.parse.add_optional(key="engine_write_access",
+                             tags="resource,tfvar",
+                             default=None,
+                             types="bool")
+
     stack.parse.add_optional(key="expire_days",
                              tags="resource,db,tfvar",
                              types="int")
