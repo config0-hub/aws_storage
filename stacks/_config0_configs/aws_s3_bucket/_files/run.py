@@ -51,7 +51,7 @@ def run(stackargs):
     stack.parse.add_optional(key="noncurrent_version_expiration",
                              tags="resource,tfvar",
                              default=None,
-                             types="bool")
+                             types="int")  # days; terraform variable is type number (was mis-declared bool)
 
     stack.parse.add_optional(key="engine_write_access",
                              tags="resource,tfvar",
