@@ -35,4 +35,4 @@ item = { "_id":{"S": trigger_id},
          "branch":{"S": branch}
          }
 
-print((b64_encode(item)))
+print(b64_encode(item))

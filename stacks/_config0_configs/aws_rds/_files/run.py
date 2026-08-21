@@ -149,17 +149,17 @@ def run(stackargs):
     stack.init_substacks()
 
     # automatically name the db_subnet_name
-    stack.set_variable("security_group_ids", 
+    stack.set_variable("security_group_ids",
                        stack.to_list(stack.sg_id),
                        tags="tfvar",
                        types="list")
 
-    stack.set_variable("db_subnet_name", 
+    stack.set_variable("db_subnet_name",
                        f"{stack.rds_name}-subnet",
                        tags="tfvar",
                        types="str")
 
-    stack.set_variable("subnet_ids", 
+    stack.set_variable("subnet_ids",
                        stack.to_list(stack.subnet_ids),
                        tags="tfvar",
                        types="list")

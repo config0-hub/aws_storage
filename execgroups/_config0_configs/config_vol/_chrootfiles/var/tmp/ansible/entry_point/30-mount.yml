@@ -1,7 +1,7 @@
 ---
 - name: Mount volume
-  hosts: all
-  user: "{{ os_user }}"
+  hosts: localhost
+  connection: local
   become: true
   become_method: sudo
   gather_facts: true
