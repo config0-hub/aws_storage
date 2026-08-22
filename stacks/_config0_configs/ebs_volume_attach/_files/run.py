@@ -24,7 +24,7 @@ def _get_instance_id(stack):
         "must_be_one": True,
         "resource_type": "server",
         "hostname": stack.hostname,
-        "region": stack.aws_default_region
+        "match": {"region": stack.aws_default_region}
     }
 
     return list(stack.get_resource(**_lookup))[0]["instance_id"]
@@ -36,7 +36,7 @@ def _get_volume_id(stack):
         "must_be_one": True,
         "name": stack.volume_name,
         "resource_type": "ebs_volume",
-        "region": stack.aws_default_region
+        "match": {"region": stack.aws_default_region}
     }
 
     return list(stack.get_resource(**_lookup))[0]["volume_id"]

@@ -27,16 +27,20 @@ def _determine_avail_zone(stack):
     # and use the available zone from the instance
     _lookup = {"must_be_one": True,
                "resource_type": "server"}
+    match = {}
 
     if stack.get_attr("aws_default_region"):
-        _lookup["region"] = stack.aws_default_region
+        match["region"] = stack.aws_default_region
 
     if stack.get_attr("instance_id"):
-        _lookup["instance_id"] = stack.instance_id
+        match["instance_id"] = stack.instance_id
     elif stack.get_attr("hostname"):
         _lookup["hostname"] = stack.hostname
     else:
         raise Exception("need to provide availability_zone/hostname/instance_id")
+
+    if match:
+        _lookup["match"] = match
 
     server_info = list(stack.get_resource(**_lookup))[0]
 
