@@ -14,15 +14,32 @@ resource "aws_s3_bucket" "default" {
     enabled = var.versioning
   }
 
-  lifecycle_rule {
-    enabled = var.enable_lifecycle
+  # Emit the lifecycle_rule only when lifecycle is enabled, and each action
+  # block only when its variable is set. A rule needs at least one action, and a
+  # nested block whose day count is null (the default) makes the AWS provider
+  # perpetually re-plan an empty block, so both are gated instead of always
+  # declared.
+  dynamic "lifecycle_rule" {
+    for_each = var.enable_lifecycle ? [1] : []
 
-    expiration {
-      days = var.expire_days
-    }
+    content {
+      enabled = true
 
-    noncurrent_version_expiration {
-      days = var.noncurrent_version_expiration
+      dynamic "expiration" {
+        for_each = var.expire_days == null ? [] : [var.expire_days]
+
+        content {
+          days = expiration.value
+        }
+      }
+
+      dynamic "noncurrent_version_expiration" {
+        for_each = var.noncurrent_version_expiration == null ? [] : [var.noncurrent_version_expiration]
+
+        content {
+          days = noncurrent_version_expiration.value
+        }
+      }
     }
   }
 
