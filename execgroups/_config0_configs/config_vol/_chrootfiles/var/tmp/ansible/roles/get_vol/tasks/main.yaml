@@ -2,6 +2,7 @@
   shell: fdisk -l|grep -v nvme0n1 | grep nvme | cut -d ":" -f 1| cut -d "/" -f 3
   register: psk
   run_once: true
+  changed_when: false
 
 - set_fact: 
     device_name="/dev/{{ psk.stdout }}"
