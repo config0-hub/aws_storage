@@ -1,0 +1,14 @@
+desc: Creates an AWS DocumentDB cluster with one instance, a subnet group, security groups, encryption at rest and TLS
+release: 0.1.0
+author: Gary Leong <gary@config0.com>
+license: GPL-3.0
+categories:
+   - aws
+   - docdb
+   - database
+   - terraform
+tags:
+   - docdb
+   - database
+   - aws
+   - terraform
