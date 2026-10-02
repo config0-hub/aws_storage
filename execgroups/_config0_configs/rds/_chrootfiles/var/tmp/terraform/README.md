@@ -60,6 +60,7 @@ module "rds" {
 | storage_encrypted | Specifies whether the DB instance is encrypted | `bool` | `false` | no |
 | port | The port on which the DB accepts connections | `number` | `3306` | no |
 | publicly_accessible | Controls if the instance is publicly accessible | `bool` | `false` | no |
+| iam_database_authentication_enabled | Specifies whether IAM database authentication is enabled | `bool` | `false` | no |
 | storage_type | The type of storage to be used by the RDS instance (gp2, gp3, io1, standard) | `string` | `"gp2"` | no |
 | skip_final_snapshot | Determines whether a final DB snapshot is created before the DB instance is deleted | `bool` | `true` | no |
 | allow_major_version_upgrade | Indicates that major version upgrades are allowed | `bool` | `true` | no |

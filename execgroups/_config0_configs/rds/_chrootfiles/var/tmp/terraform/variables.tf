@@ -94,6 +94,12 @@ variable "publicly_accessible" {
   default     = false
 }
 
+variable "iam_database_authentication_enabled" {
+  description = "Specifies whether IAM database authentication is enabled"
+  type        = bool
+  default     = false
+}
+
 variable "storage_type" {
   description = "The type of storage to be used by the RDS instance (gp2, gp3, io1, standard)"
   type        = string

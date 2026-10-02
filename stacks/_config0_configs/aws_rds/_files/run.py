@@ -73,6 +73,11 @@ def run(stackargs):
                              tags="tfvar",
                              types="bool")
 
+    stack.parse.add_optional(key="iam_database_authentication_enabled",
+                             default="false",
+                             tags="tfvar",
+                             types="bool")
+
     stack.parse.add_optional(key="storage_encrypted",
                              default="false",
                              tags="tfvar",

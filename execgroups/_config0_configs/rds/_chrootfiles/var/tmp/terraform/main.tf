@@ -33,6 +33,8 @@ resource "aws_db_instance" "default" {
   storage_encrypted   = var.storage_encrypted
   storage_type        = var.storage_type
 
+  iam_database_authentication_enabled = var.iam_database_authentication_enabled
+
   allow_major_version_upgrade = var.allow_major_version_upgrade
   auto_minor_version_upgrade  = var.auto_minor_version_upgrade
   skip_final_snapshot         = var.skip_final_snapshot

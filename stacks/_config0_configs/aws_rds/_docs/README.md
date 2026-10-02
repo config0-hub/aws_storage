@@ -25,6 +25,7 @@ This stack creates and configures an AWS RDS MySQL database instance with custom
 | multi_az | Enable multi-AZ deployment | `false` |
 | storage_type | Database storage type | `gp2` |
 | publicly_accessible | Make database publicly accessible | `false` |
+| iam_database_authentication_enabled | Enable IAM database authentication | `false` |
 | storage_encrypted | Enable storage encryption | `false` |
 | allow_major_version_upgrade | Allow major version upgrades | `true` |
 | auto_minor_version_upgrade | Allow minor version upgrades | `true` |
