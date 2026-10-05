@@ -119,7 +119,9 @@ def run(stackargs):
         values["_id"] = _id
         values["id"] = _id
 
-        inputargs["values"] = values
+        # Resource identity stays in values. The order takes its cluster and
+        # instance from the stack, not from caller keywords.
+        inputargs = {"schedule_id": stack.schedule_id, "values": values}
         human_description = f'Adding resource_type "{values["resource_type"]}" id "{_id}"'
         inputargs["human_description"] = human_description
 
