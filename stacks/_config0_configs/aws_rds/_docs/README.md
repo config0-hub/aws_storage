@@ -1,7 +1,7 @@
 # AWS RDS MySQL Database Stack
 
 ## Description
-This stack creates and configures an AWS RDS MySQL database instance with customizable parameters, security groups, and subnet associations.
+This stack creates and configures an AWS RDS MySQL database instance with customizable parameters, security groups, and subnet associations. RDS makes the master password and keeps it in AWS Secrets Manager; the stack never makes, takes or publishes it.
 
 ## Variables
 
@@ -30,15 +30,15 @@ This stack creates and configures an AWS RDS MySQL database instance with custom
 | allow_major_version_upgrade | Allow major version upgrades | `true` |
 | auto_minor_version_upgrade | Allow minor version upgrades | `true` |
 | skip_final_snapshot | Skip final snapshot on deletion | `true` |
+| deletion_protection | Refuse deletion of the database | `false` |
 | port | Database port | `3306` |
 | backup_retention_period | Backup retention period in days | `1` |
 | backup_window | Preferred backup window | `10:22-11:22` |
 | maintenance_window | Preferred maintenance window | `Mon:00:00-Mon:03:00` |
 | rds_master_username | Database admin username | `None` |
-| rds_master_password | Database admin password | `None` |
 | aws_default_region | Default AWS region | `eu-west-1` |
-| publish_creds | Configuration for publish creds | `None` |
-| publish_to_saas | Boolean to publish values to config0 SaaS UI | `None` |
+| publish_creds | Publish the ARN of the Secrets Manager secret that holds the master user name and password (`master_user_secret_arn`) to the config0 SaaS UI | `None` |
+| publish_to_saas | Boolean to publish values to config0 SaaS UI, including `master_user_secret_arn` | `None` |
 
 ## Dependencies
 
