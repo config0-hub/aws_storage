@@ -1,7 +1,7 @@
 # AWS Redshift Cluster Stack
 
 ## Description
-This stack creates an AWS Redshift provisioned cluster, single-node `ra3.large` by default, encrypted and not publicly accessible, with a dedicated cluster subnet group and security groups. The resource row carries `redshift_cluster` and `db_name`, the target fields a `redshift_access` grant takes.
+This stack creates an AWS Redshift provisioned cluster, single-node `ra3.large` by default, encrypted and not publicly accessible, with a dedicated cluster subnet group and security groups. Redshift makes the master password and keeps it in AWS Secrets Manager; the stack never makes, takes or publishes it. The resource row carries `redshift_cluster` and `db_name`, the target fields a `redshift_access` grant takes.
 
 ## Variables
 
@@ -25,10 +25,9 @@ This stack creates an AWS Redshift provisioned cluster, single-node `ra3.large` 
 | encrypted | Encrypt the cluster at rest | `true` |
 | skip_final_snapshot | Skip final snapshot on deletion | `true` |
 | master_username | Cluster admin username | `None` |
-| master_password | Cluster admin password | `None` |
 | aws_default_region | Default AWS region | `eu-west-1` |
-| publish_creds | Configuration for publish creds | `None` |
-| publish_to_saas | Boolean to publish values to config0 SaaS UI | `None` |
+| publish_creds | Publish the ARN of the Secrets Manager secret that holds the master user name and password (`master_user_secret_arn`) to the config0 SaaS UI | `None` |
+| publish_to_saas | Boolean to publish values to config0 SaaS UI, including `master_user_secret_arn` | `None` |
 
 ## Dependencies
 

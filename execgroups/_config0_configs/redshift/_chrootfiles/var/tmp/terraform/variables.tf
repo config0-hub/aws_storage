@@ -28,12 +28,6 @@ variable "master_username" {
   sensitive   = true
 }
 
-variable "master_password" {
-  description = "Password for the master DB user"
-  type        = string
-  sensitive   = true
-}
-
 variable "security_group_ids" {
   type        = list(string)
   description = "List of VPC security group IDs to associate with the Redshift cluster"

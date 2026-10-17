@@ -74,11 +74,6 @@ def run(stackargs):
                              tags="tfvar",
                              types="str")
 
-    stack.parse.add_optional(key="master_password",
-                             default=None,
-                             tags="tfvar",
-                             types="str")
-
     stack.parse.add_optional(key="aws_default_region",
                              default="eu-west-1",
                              tags="tfvar,db,resource,tf_exec_env",
@@ -120,10 +115,10 @@ def run(stackargs):
                        tags="tfvar",
                        types="list")
 
-    # set username and password
-    # ponytail: fixed prefixes meet Redshift's rules - the username starts with
-    # a letter; the password needs an uppercase, a lowercase and a digit
-    # (random_id is lowercase letters and digits only).
+    # set the master username. Redshift makes the master password itself and
+    # keeps it in AWS Secrets Manager, so this stack never makes or takes one.
+    # ponytail: the "u" prefix makes the username start with a letter, as
+    # Redshift requires (random_id is lowercase letters and digits only).
     if not stack.get_attr("master_username") and stack.inputvars.get("DB_MASTER_USERNAME"):
         stack.set_variable("master_username",
                            stack.inputvars["DB_MASTER_USERNAME"],
@@ -135,25 +130,17 @@ def run(stackargs):
                            tags="tfvar",
                            types="str")
 
-    if not stack.get_attr("master_password") and stack.inputvars.get("DB_MASTER_PASSWORD"):
-        stack.set_variable("master_password",
-                           stack.inputvars["DB_MASTER_PASSWORD"],
-                           tags="tfvar",
-                           types="str")
-    elif not stack.get_attr("master_password"):
-        stack.set_variable("master_password",
-                           f"Rs0{stack.random_id(size=20)}",
-                           tags="tfvar",
-                           types="str")
-
     stack.set_variable("timeout", 2700)
 
     # use the terraform constructor (helper)
+    # the redshift execgroup's module (terraform-aws-modules/redshift/aws
+    # 7.1.1) needs OpenTofu >= 1.11; the stack names 1.11.14, as aws_rds does.
     tf = TFConstructor(stack=stack,
                        execgroup_name=stack.tf_execgroup.name,
                        provider="aws",
                        resource_name=stack.redshift_name,
-                       resource_type="redshift")
+                       resource_type="redshift",
+                       tf_runtime="tofu:1.11.14")
 
     # redshift_cluster and db_name are the redshift_access target fields
     tf.include(values={"redshift_cluster": stack.redshift_name})
@@ -170,17 +157,15 @@ def run(stackargs):
         "encrypted"
     ]
 
+    # put the ARN of the Secrets Manager secret that holds the master user
+    # name and password onto the saas ui (optional). Never the user or the
+    # password: they stay in the secret.
+    if stack.get_attr("publish_creds") or stack.get_attr("publish_to_saas"):
+        output_keys.append("master_user_secret_arn")
+
     tf.output(keys=output_keys)
 
     # finalize the tf_executor
     stack.tf_executor.insert(display=True, **tf.get())
-
-    # put outputs onto the saas ui (optional)
-    if stack.get_attr("publish_creds") or stack.get_attr("publish_to_saas"):
-        _cred_outputs = {
-            "redshift_root_user": stack.master_username,
-            "redshift_root_password": stack.master_password
-        }
-        stack.output_to_ui(_cred_outputs)
 
     return stack.get_results()

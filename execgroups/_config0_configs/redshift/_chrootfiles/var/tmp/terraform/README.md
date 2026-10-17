@@ -1,12 +1,18 @@
 # AWS Redshift Module
 
-This OpenTofu module creates an AWS Redshift provisioned cluster with a dedicated cluster subnet group.
+This OpenTofu module creates an AWS Redshift provisioned cluster with a dedicated cluster subnet group
+through the community module `terraform-aws-modules/redshift/aws` 7.1.1.
 
 ## Features
 
 - Creates an encrypted Redshift cluster, single-node by default (`ra3.large`)
 - Sets up a dedicated cluster subnet group for the cluster
 - Not publicly accessible by default; no final snapshot on deletion
+- Redshift makes the master password and keeps it in AWS Secrets Manager
+  (`manage_master_password = true`). Redshift rotates it every 30 days by default and
+  deletes it with the cluster. No password variable exists.
+- Uses the stack's security groups and the default parameter group; AWS picks the
+  maintenance window
 
 ## Usage
 
@@ -18,7 +24,6 @@ module "redshift" {
   cluster_subnet_name = "my-redshift-subnet"
   db_name             = "analytics"
   master_username     = "admin"
-  master_password     = "SecurePassword123"
 
   subnet_ids         = ["subnet-1234abcd", "subnet-5678efgh"]
   security_group_ids = ["sg-1234abcd"]
@@ -31,8 +36,8 @@ module "redshift" {
 
 ## Requirements
 
-- OpenTofu >= 1.8.8
-- AWS Provider
+- OpenTofu or Terraform >= 1.11 (the redshift module 7.1.1 needs it)
+- AWS Provider `~> 6.27`
 
 ## Variables
 
@@ -43,7 +48,6 @@ module "redshift" {
 | redshift_name | The cluster identifier of the Redshift cluster | `string` | `"test-redshift"` | no |
 | cluster_subnet_name | The name of the Redshift cluster subnet group | `string` | `"cluster_subnet_name"` | no |
 | master_username | Username for the master DB user | `string` | n/a | yes |
-| master_password | Password for the master DB user | `string` | n/a | yes |
 | security_group_ids | List of VPC security group IDs to associate with the Redshift cluster | `list(string)` | n/a | yes |
 | subnet_ids | List of subnet IDs to include in the cluster subnet group | `list(string)` | n/a | yes |
 | node_type | The node type of the Redshift cluster | `string` | `"ra3.large"` | no |
@@ -70,6 +74,12 @@ module "redshift" {
 | number_of_nodes | The number of compute nodes in the Redshift cluster |
 | publicly_accessible | Whether the Redshift cluster is publicly accessible |
 | encrypted | Whether the Redshift cluster is encrypted at rest |
+| master_user_secret_arn | The ARN of the Secrets Manager secret that holds the master user name and password |
+
+## Security Considerations
+
+- The master password never passes through this module; read it from the secret at
+  `master_user_secret_arn`, and grant read access to that secret to whatever connects
 
 ## License
 

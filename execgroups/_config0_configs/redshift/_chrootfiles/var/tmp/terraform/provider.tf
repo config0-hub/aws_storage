@@ -41,14 +41,16 @@ provider "aws" {
 # Terraform Version Configuration
 # Specifies the required Terraform and provider versions
 terraform {
-  # Minimum Terraform version required
-  required_version = ">= 1.1.0"
+  # The redshift module 7.1.1 needs OpenTofu or Terraform >= 1.11
+  required_version = ">= 1.11"
 
   # Required providers with version constraints
   required_providers {
     aws = {
-      source  = "hashicorp/aws" # AWS provider source
-      version = "~> 5.0"        # Compatible with AWS provider v5.x
+      source = "hashicorp/aws" # AWS provider source
+      # The redshift module 7.1.1 needs >= 6.27. No lock file pins the
+      # provider, so this stays on 6.x.
+      version = "~> 6.27"
     }
   }
 }
