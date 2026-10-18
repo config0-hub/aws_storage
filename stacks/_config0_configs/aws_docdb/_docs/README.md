@@ -1,7 +1,7 @@
 # AWS DocumentDB Stack
 
 ## Description
-This stack creates an AWS DocumentDB 5.0 cluster with one instance, a dedicated subnet group, security groups, encryption at rest and TLS. The resource row carries `db_endpoint`, `db_port` and `db_name`, the target fields a `docdb_access` grant takes.
+This stack creates an AWS DocumentDB 5.0 cluster with one instance, a dedicated subnet group, security groups, encryption at rest and TLS. DocumentDB makes the master password and keeps it in AWS Secrets Manager; the stack never makes, takes or publishes it. The resource row carries `db_endpoint`, `db_port` and `db_name`, the target fields a `docdb_access` grant takes, and `master_user_secret_arn`, the secret the grant reads the admin login from.
 
 ## Variables
 
@@ -23,11 +23,11 @@ This stack creates an AWS DocumentDB 5.0 cluster with one instance, a dedicated 
 | port | Cluster port | `27017` |
 | storage_encrypted | Enable storage encryption | `true` |
 | skip_final_snapshot | Skip final snapshot on deletion | `true` |
+| deletion_protection | Refuse to delete the cluster | `false` |
 | master_username | Cluster admin username | `None` |
-| master_password | Cluster admin password | `None` |
 | aws_default_region | Default AWS region | `eu-west-1` |
-| publish_creds | Configuration for publish creds | `None` |
-| publish_to_saas | Boolean to publish values to config0 SaaS UI | `None` |
+| publish_creds | Publish the ARN of the Secrets Manager secret that holds the master user name and password (`master_user_secret_arn`) to the config0 SaaS UI | `None` |
+| publish_to_saas | Boolean to publish values to config0 SaaS UI, including `master_user_secret_arn` | `None` |
 
 ## Dependencies
 

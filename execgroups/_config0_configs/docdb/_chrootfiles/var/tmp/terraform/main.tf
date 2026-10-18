@@ -25,10 +25,19 @@ resource "aws_docdb_cluster" "default" {
   vpc_security_group_ids = var.security_group_ids
 
   master_username = var.master_username
-  master_password = var.master_password
 
-  storage_encrypted   = var.storage_encrypted
+  # DocumentDB makes the master password, keeps it in AWS Secrets Manager and
+  # deletes it with the cluster. Config0 never makes, sees or stores it.
+  # DocumentDB rotates it every seven days by default; nothing here adds a
+  # schedule.
+  manage_master_user_password = true
+
+  storage_encrypted = var.storage_encrypted
+
+  # From the stack: the provider's own default (skip_final_snapshot = false)
+  # makes every destroy need a final snapshot name.
   skip_final_snapshot = var.skip_final_snapshot
+  deletion_protection = var.deletion_protection
 
   tags = merge(
     var.cloud_tags,

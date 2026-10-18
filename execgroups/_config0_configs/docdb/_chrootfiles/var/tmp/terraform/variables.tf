@@ -28,12 +28,6 @@ variable "master_username" {
   type        = string
 }
 
-variable "master_password" {
-  description = "Password for the master DB user"
-  type        = string
-  sensitive   = true
-}
-
 variable "security_group_ids" {
   type        = list(string)
   description = "List of VPC security group IDs to associate with the DocumentDB cluster"
@@ -72,6 +66,12 @@ variable "skip_final_snapshot" {
   description = "Determines whether a final snapshot is created before the cluster is deleted"
   type        = bool
   default     = true
+}
+
+variable "deletion_protection" {
+  description = "Whether the DocumentDB cluster refuses to be deleted"
+  type        = bool
+  default     = false
 }
 
 variable "cloud_tags" {

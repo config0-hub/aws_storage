@@ -63,3 +63,8 @@ output "storage_encrypted" {
   description = "Whether the DocumentDB cluster is encrypted at rest"
   value       = aws_docdb_cluster.default.storage_encrypted
 }
+
+output "master_user_secret_arn" {
+  description = "The ARN of the Secrets Manager secret that holds the master user name and password"
+  value       = aws_docdb_cluster.default.master_user_secret[0].secret_arn
+}

@@ -47,8 +47,11 @@ terraform {
   # Required providers with version constraints
   required_providers {
     aws = {
-      source  = "hashicorp/aws" # AWS provider source
-      version = "~> 5.0"        # Compatible with AWS provider v5.x
+      source = "hashicorp/aws" # AWS provider source
+      # aws_docdb_cluster takes manage_master_user_password from 5.98.0; this
+      # is the 6.x line the rds execgroup runs. No lock file pins the
+      # provider, so this stays on 6.x.
+      version = "~> 6.28"
     }
   }
 }
